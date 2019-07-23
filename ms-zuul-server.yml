@@ -1,0 +1,40 @@
+server:
+  port: 7070
+eureka:
+  client:
+    registerWithEureka: false
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/
+ribbon:
+  ReadTimeout: 10000
+  ConnectTimeout: 3000
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 20000
+zuul:
+  routes:
+    productos:
+      path: /api/productos/**
+      serviceId: ms-productos
+      #stripPrefix: false
+    items:
+      path: /api/items/**
+      serviceId: ms-items
+#      stripPrefix: false
+    usuarios:
+      path: /api/usuarios/**
+      serviceId: ms-usuarios
+      #      stripPrefix: false
+    security:
+      path: /api/security/**
+      service-id: ms-oauth
+      sensitive-headers: Cookie,Set-Cookie
+config:
+  security:
+    oauth:
+      jwt:
+        key: algo

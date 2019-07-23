@@ -1,0 +1,20 @@
+server:
+  port: 8002
+configuracion:
+  texto: Configurando ambiente por defecto
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka
+spring:
+  profiles:
+    active: dev
+feign:
+  hystrix:
+    enabled: true
+  client:
+    config:
+      default:
+        connectTimeout: 20000
+        readTimeout: 20000
+        loggerLevel: full
